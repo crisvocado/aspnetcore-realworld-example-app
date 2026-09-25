@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using Conduit;
 using Conduit.Infrastructure;
 using Conduit.Infrastructure.Errors;
+using Conduit.Infrastructure.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi;
+
+if (args.Length > 0 && args[0] == "probe")
+{
+    LogcoreProbe.Run();
+    return;
+}
 
 // read database configuration (database provider + database connection) from environment variables
 //Environment.GetEnvironmentVariable(DEFAULT_DATABASE_PROVIDER)
