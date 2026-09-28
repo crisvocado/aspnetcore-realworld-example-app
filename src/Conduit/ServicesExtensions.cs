@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Conduit.Features.Profiles;
 using Conduit.Infrastructure;
+using Conduit.Infrastructure.Logging;
 using Conduit.Infrastructure.Security;
 using FluentValidation;
 using Mediator;
@@ -118,6 +119,7 @@ public static class ServicesExtensions
                 outputTemplate: "{Timestamp:HH:mm:ss} [{Level}] {SourceContext} {Message}{NewLine}{Exception}",
                 theme: AnsiConsoleTheme.Code
             )
+            .WriteTo.Logcore()
             .CreateLogger();
 
         loggerFactory.AddSerilog(log);
