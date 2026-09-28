@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Conduit;
 using Conduit.Infrastructure;
 using Conduit.Infrastructure.Errors;
+using Conduit.Infrastructure.Logcore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -103,6 +104,11 @@ builder.Services.AddJwt();
 var app = builder.Build();
 
 app.Services.GetRequiredService<ILoggerFactory>().AddSerilogLogging();
+
+if (LogcoreProbe.HandleCommandLineArgs(args))
+{
+    return;
+}
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 

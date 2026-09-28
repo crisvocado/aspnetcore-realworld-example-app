@@ -118,6 +118,7 @@ public static class ServicesExtensions
                 outputTemplate: "{Timestamp:HH:mm:ss} [{Level}] {SourceContext} {Message}{NewLine}{Exception}",
                 theme: AnsiConsoleTheme.Code
             )
+            .WriteTo.Logcore()
             .CreateLogger();
 
         loggerFactory.AddSerilog(log);
