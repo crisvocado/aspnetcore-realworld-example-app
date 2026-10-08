@@ -12,6 +12,12 @@ using Microsoft.OpenApi;
 // read database configuration (database provider + database connection) from environment variables
 //Environment.GetEnvironmentVariable(DEFAULT_DATABASE_PROVIDER)
 //Environment.GetEnvironmentVariable(DEFAULT_DATABASE_CONNECTION_STRING)
+if (args.Length > 0 && Array.Exists(args, a => a == "--logcore-probe"))
+{
+    await Conduit.Infrastructure.Logging.LogcoreProbe.RunAsync();
+    return;
+}
+
 var defaultDatabaseConnectionString = "Filename=realworld.db";
 var defaultDatabaseProvider = "sqlite";
 
